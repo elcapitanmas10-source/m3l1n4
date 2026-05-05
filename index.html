@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>¡Feliz Cumpleaños!</title>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #2c3e50;
+            --card-bg: #ecf0f1;
+            --pixel-pink: #ff6b6b;
+            --pixel-yellow: #f1c40f;
+            --pixel-blue: #3498db;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            font-family: 'Press Start 2P', cursive;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            overflow: hidden;
+            color: #333;
+        }
+
+        /* Contenedor de Confeti Pixelado */
+        .confetti {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background: var(--pixel-yellow);
+            top: -10px;
+            z-index: 0;
+            animation: fall linear infinite;
+        }
+
+        @keyframes fall {
+            to { transform: translateY(105vh) rotate(360deg); }
+        }
+
+        /* La Tarjeta */
+        .card {
+            background-color: var(--card-bg);
+            border: 6px solid #000;
+            padding: 30px;
+            text-align: center;
+            width: 90%;
+            max-width: 450px;
+            box-shadow: 12px 12px 0px rgba(0,0,0,0.3);
+            position: relative;
+            z-index: 10;
+            image-rendering: pixelated;
+        }
+
+        .pixel-heart {
+            font-size: 50px;
+            color: var(--pixel-pink);
+            animation: beat 0.8s infinite;
+            margin-bottom: 20px;
+        }
+
+        @keyframes beat {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        h1 {
+            font-size: 18px;
+            line-height: 1.5;
+            margin-bottom: 20px;
+            color: #000;
+        }
+
+        #message {
+            font-size: 12px;
+            line-height: 1.8;
+            height: 100px;
+            text-align: left;
+            border-top: 4px double #000;
+            padding-top: 15px;
+        }
+
+        .btn {
+            background-color: var(--pixel-blue);
+            color: white;
+            padding: 15px;
+            border: 4px solid #000;
+            cursor: pointer;
+            font-family: 'Press Start 2P', cursive;
+            font-size: 10px;
+            margin-top: 20px;
+            box-shadow: 4px 4px 0px #217dbb;
+        }
+
+        .btn:active {
+            box-shadow: 0px 0px 0px;
+            transform: translate(4px, 4px);
+        }
+
+        /* Ocultar mensaje inicial */
+        .hidden { display: none; }
+    </style>
+</head>
+<body>
+
+    <div class="card">
+        <div class="pixel-heart">❤</div>
+        <h1 id="title">¿LISTO PARA TU REGALO?</h1>
+        
+        <div id="message"></div>
+
+        <button class="btn" id="startBtn">PRESIONA START</button>
+    </div>
+
+    <script>
+        const messageElement = document.getElementById('message');
+        const startBtn = document.getElementById('startBtn');
+        const title = document.getElementById('title');
+
+        const text = "Eres una persona increíblemente especial. Que este nuevo año de vida esté lleno de niveles superados y muchas alegrías. ¡Te quiero muchísimo! ❤";
+        
+        let i = 0;
+
+        function typeWriter() {
+            if (i < text.length) {
+                messageElement.innerHTML += text.charAt(i);
+                i++;
+                setTimeout(typeWriter, 50);
+            }
+        }
+
+        function createConfetti() {
+            for (let j = 0; j < 50; j++) {
+                const confetti = document.createElement('div');
+                confetti.classList.add('confetti');
+                confetti.style.left = Math.random() * 100 + 'vw';
+                confetti.style.animationDuration = (Math.random() * 3 + 2) + 's';
+                confetti.style.backgroundColor = ['#ff6b6b','#f1c40f','#3498db','#2ecc71'][Math.floor(Math.random()*4)];
+                document.body.appendChild(confetti);
+            }
+        }
+
+        startBtn.addEventListener('click', () => {
+            startBtn.classList.add('hidden');
+            title.innerText = "¡FELIZ CUMPLE!";
+            typeWriter();
+            createConfetti();
+        });
+    </script>
+</body>
+</html>
