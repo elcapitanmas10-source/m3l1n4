@@ -3,19 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>¡Feliz Cumpleaños!</title>
+    <title>HBD_LEVEL_UP</title>
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
     <style>
-        :root {
-            --bg-color: #2c3e50;
-            --card-bg: #ecf0f1;
-            --pixel-pink: #ff6b6b;
-            --pixel-yellow: #f1c40f;
-            --pixel-blue: #3498db;
-        }
-
+        * { box-sizing: border-box; }
+        
         body {
-            background-color: var(--bg-color);
+            background: linear-gradient(-45deg, #0f0c29, #302b63, #24243e);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
             font-family: 'Press Start 2P', cursive;
             display: flex;
             justify-content: center;
@@ -23,131 +19,159 @@
             height: 100vh;
             margin: 0;
             overflow: hidden;
-            color: #333;
+            color: #fff;
         }
 
-        /* Contenedor de Confeti Pixelado */
-        .confetti {
-            position: absolute;
-            width: 8px;
-            height: 8px;
-            background: var(--pixel-yellow);
-            top: -10px;
-            z-index: 0;
-            animation: fall linear infinite;
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
 
-        @keyframes fall {
-            to { transform: translateY(105vh) rotate(360deg); }
-        }
-
-        /* La Tarjeta */
-        .card {
-            background-color: var(--card-bg);
-            border: 6px solid #000;
-            padding: 30px;
-            text-align: center;
+        /* Contenedor Principal Estilo Consola */
+        .console-container {
             width: 90%;
-            max-width: 450px;
-            box-shadow: 12px 12px 0px rgba(0,0,0,0.3);
+            max-width: 500px;
+            background: rgba(0, 0, 0, 0.8);
+            border: 4px solid #fff;
+            padding: 20px;
             position: relative;
-            z-index: 10;
-            image-rendering: pixelated;
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
         }
 
-        .pixel-heart {
-            font-size: 50px;
-            color: var(--pixel-pink);
-            animation: beat 0.8s infinite;
-            margin-bottom: 20px;
+        /* Pantalla de Texto con Scroll oculto */
+        .screen {
+            background: #1a1a1a;
+            border: 4px solid #444;
+            padding: 20px;
+            height: 250px;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            position: relative;
+            overflow-y: auto; /* Permite scroll si el mensaje es largo */
+            scrollbar-width: none; /* Oculta scroll en Firefox */
         }
 
-        @keyframes beat {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.1); }
+        .screen::-webkit-scrollbar { display: none; } /* Oculta scroll en Chrome/Safari */
+
+        .pixel-portrait {
+            width: 64px;
+            height: 64px;
+            background: #ff6b6b;
+            margin: 0 auto 15px;
+            box-shadow: 
+                0 -4px 0 #000, 0 4px 0 #000, 
+                -4px 0 0 #000, 4px 0 0 #000,
+                0 -8px 0 #ff6b6b, 0 8px 0 #ff6b6b,
+                -8px 0 0 #ff6b6b, 8px 0 0 #ff6b6b;
+            animation: pulse 1s infinite;
         }
 
-        h1 {
-            font-size: 18px;
-            line-height: 1.5;
-            margin-bottom: 20px;
-            color: #000;
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); filter: brightness(1); }
+            50% { transform: scale(1.05); filter: brightness(1.2); }
         }
 
-        #message {
-            font-size: 12px;
-            line-height: 1.8;
-            height: 100px;
-            text-align: left;
-            border-top: 4px double #000;
-            padding-top: 15px;
+        h1 { font-size: 14px; text-align: center; color: #00ffcc; text-shadow: 2px 2px #000; }
+
+        #dialogue {
+            font-size: 11px;
+            line-height: 1.6;
+            color: #fff;
+            word-wrap: break-word;
         }
 
-        .btn {
-            background-color: var(--pixel-blue);
-            color: white;
-            padding: 15px;
-            border: 4px solid #000;
+        /* Botón Estilo Arcade */
+        .btn-start {
+            display: block;
+            margin: 20px auto 0;
+            background: #ff0055;
+            color: #fff;
+            padding: 12px 20px;
+            border: none;
             cursor: pointer;
             font-family: 'Press Start 2P', cursive;
             font-size: 10px;
-            margin-top: 20px;
-            box-shadow: 4px 4px 0px #217dbb;
+            box-shadow: 0 6px 0 #990033;
+            transition: all 0.1s;
         }
 
-        .btn:active {
-            box-shadow: 0px 0px 0px;
-            transform: translate(4px, 4px);
+        .btn-start:active {
+            box-shadow: 0 0 0 #990033;
+            transform: translateY(6px);
         }
 
-        /* Ocultar mensaje inicial */
         .hidden { display: none; }
+
+        /* Partículas */
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: #fff;
+            pointer-events: none;
+        }
     </style>
 </head>
 <body>
 
-    <div class="card">
-        <div class="pixel-heart">❤</div>
-        <h1 id="title">¿LISTO PARA TU REGALO?</h1>
-        
-        <div id="message"></div>
-
-        <button class="btn" id="startBtn">PRESIONA START</button>
+    <div class="console-container">
+        <div class="screen">
+            <div class="pixel-portrait" id="icon"></div>
+            <h1 id="header">PLAYER 1 READY?</h1>
+            <div id="dialogue"></div>
+        </div>
+        <button class="btn-start" id="actionBtn">PRESS START</button>
     </div>
 
     <script>
-        const messageElement = document.getElementById('message');
-        const startBtn = document.getElementById('startBtn');
-        const title = document.getElementById('title');
+        const dialogueBox = document.getElementById('dialogue');
+        const actionBtn = document.getElementById('actionBtn');
+        const header = document.getElementById('header');
+        const icon = document.getElementById('icon');
 
-        const text = "Eres una persona increíblemente especial. Que este nuevo año de vida esté lleno de niveles superados y muchas alegrías. ¡Te quiero muchísimo! ❤";
-        
-        let i = 0;
+        const message = "¡Feliz Cumpleaños! ❤\n\nEres la persona más especial de mi mundo. Quería darte algo diferente, como nosotros.\n\nEspero que este nuevo 'level' venga lleno de items positivos y mucha felicidad. ¡Te quiero muchísimo!";
+
+        let index = 0;
 
         function typeWriter() {
-            if (i < text.length) {
-                messageElement.innerHTML += text.charAt(i);
-                i++;
-                setTimeout(typeWriter, 50);
+            if (index < message.length) {
+                // Traducir saltos de línea a HTML
+                const char = message.charAt(index);
+                dialogueBox.innerHTML += char === "\n" ? "<br>" : char;
+                index++;
+                // Auto-scroll hacia abajo mientras escribe
+                document.querySelector('.screen').scrollTop = document.querySelector('.screen').scrollHeight;
+                setTimeout(typeWriter, 40);
             }
         }
 
-        function createConfetti() {
-            for (let j = 0; j < 50; j++) {
-                const confetti = document.createElement('div');
-                confetti.classList.add('confetti');
-                confetti.style.left = Math.random() * 100 + 'vw';
-                confetti.style.animationDuration = (Math.random() * 3 + 2) + 's';
-                confetti.style.backgroundColor = ['#ff6b6b','#f1c40f','#3498db','#2ecc71'][Math.floor(Math.random()*4)];
-                document.body.appendChild(confetti);
+        function spawnParticles() {
+            for(let i = 0; i < 30; i++) {
+                const p = document.createElement('div');
+                p.className = 'particle';
+                p.style.left = Math.random() * 100 + 'vw';
+                p.style.top = Math.random() * 100 + 'vh';
+                p.style.opacity = Math.random();
+                document.body.appendChild(p);
+                
+                // Movimiento simple
+                let speed = Math.random() * 2 + 1;
+                setInterval(() => {
+                    let top = parseFloat(p.style.top);
+                    p.style.top = (top + 0.1 * speed) + 'vh';
+                    if(top > 100) p.style.top = '-5vh';
+                }, 20);
             }
         }
 
-        startBtn.addEventListener('click', () => {
-            startBtn.classList.add('hidden');
-            title.innerText = "¡FELIZ CUMPLE!";
+        actionBtn.addEventListener('click', () => {
+            actionBtn.style.display = 'none';
+            header.innerText = "MESSAGE RECEIVED:";
+            icon.style.background = "#00ffcc"; // Cambia color al activar
             typeWriter();
-            createConfetti();
+            spawnParticles();
         });
     </script>
 </body>
