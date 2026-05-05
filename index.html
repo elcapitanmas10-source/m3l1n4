@@ -3,19 +3,36 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Para Alguien Especial</title>
+    
+    <!-- Configuración para que el link se vea lindo en WhatsApp -->
+    <title>Para Alguien Especial ❤</title>
+    <meta name="description" content="Tengo algo lindo para decirte, abrí el link...">
+    <meta property="og:title" content="¡Feliz Cumpleaños! 🎂">
+    <meta property="og:description" content="Hice esto pensando en vos.">
+    
+    <!-- Ícono del corazón en la pestaña del navegador -->
+    <link rel="icon" href="https://fav.farm/❤" />
+
+    <!-- Tipografía moderna y amigable -->
     <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;700&display=swap" rel="stylesheet">
+    
     <style>
         :root {
             --primary: #ff85a1;
-            --secondary: #fce4ec;
+            --primary-dark: #ff5c8d;
             --text: #4a4a4a;
+            --bg-gradient: linear-gradient(135deg, #fdfcfb 0%, #e2d1c3 100%);
+        }
+
+        * {
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
         }
 
         body {
-            background-color: #f0f2f5;
-            background-image: radial-gradient(#ffcad4 0.5px, #f0f2f5 0.5px);
-            background-size: 20px 20px; /* Fondo de puntos sutil */
+            background: var(--bg-gradient);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
             font-family: 'Quicksand', sans-serif;
             display: flex;
             justify-content: center;
@@ -25,126 +42,187 @@
             overflow: hidden;
         }
 
-        /* Tarjeta con sombreado moderno y bordes redondeados */
-        .card {
-            background: rgba(255, 255, 255, 0.9);
-            backdrop-filter: blur(10px);
-            border-radius: 24px;
-            padding: 40px;
-            width: 90%;
-            max-width: 400px;
-            text-align: center;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
-            border: 1px solid rgba(255,255,255,0.5);
-            position: relative;
-            z-index: 10;
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
 
-        /* Ilustración Pixel Art (Corazón estilizado con sombras) */
-        .pixel-art-container {
-            width: 80px;
-            height: 80px;
+        /* Tarjeta con efecto de elevación y bordes suaves */
+        .card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 30px;
+            padding: 40px 25px;
+            width: 90%;
+            max-width: 380px;
+            text-align: center;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.8);
+            position: relative;
+            z-index: 10;
+            transition: transform 0.3s ease;
+        }
+
+        /* Corazón en Pixel Art con sombreado interno */
+        .pixel-heart {
+            width: 70px;
+            height: 70px;
             margin: 0 auto 25px;
             position: relative;
+            background-color: var(--primary);
+            /* Dibujo del corazón */
+            clip-path: polygon(0 30%, 0 50%, 15% 70%, 50% 100%, 85% 70%, 100% 50%, 100% 30%, 80% 10%, 60% 10%, 50% 25%, 40% 10%, 20% 10%);
+            box-shadow: inset -8px -8px 0px rgba(0,0,0,0.1); 
+            animation: floating 2.5s ease-in-out infinite;
             image-rendering: pixelated;
         }
 
-        .heart-pixel {
-            width: 100%;
-            height: 100%;
-            background-color: var(--primary);
-            /* Dibujo de corazón mediante clip-path o sombras */
-            clip-path: polygon(0 30%, 0 50%, 15% 70%, 50% 100%, 85% 70%, 100% 50%, 100% 30%, 80% 10%, 60% 10%, 50% 25%, 40% 10%, 20% 10%);
-            box-shadow: inset -6px -6px 0px rgba(0,0,0,0.1); /* Sombreado interno */
-            animation: floating 3s ease-in-out infinite;
+        /* Sombra dinámica que reacciona al movimiento del corazón */
+        .heart-shadow {
+            width: 45px;
+            height: 10px;
+            background: rgba(0,0,0,0.06);
+            border-radius: 50%;
+            margin: -15px auto 25px;
+            animation: shadowSize 2.5s ease-in-out infinite;
         }
 
         @keyframes floating {
             0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
+            50% { transform: translateY(-15px); }
+        }
+
+        @keyframes shadowSize {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(0.6); opacity: 0.4; }
         }
 
         h1 {
             color: var(--text);
-            font-size: 22px;
-            margin-bottom: 15px;
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            line-height: 1.3;
         }
 
         .message-box {
-            color: #666;
-            font-size: 16px;
-            line-height: 1.6;
-            min-height: 80px;
-            margin-bottom: 20px;
+            color: #555;
+            font-size: 15px;
+            line-height: 1.7;
+            min-height: 110px;
+            font-weight: 500;
+            text-align: center;
         }
 
         .btn-open {
             background: var(--primary);
             color: white;
             border: none;
-            padding: 15px 30px;
+            padding: 16px 35px;
             border-radius: 50px;
-            font-size: 16px;
-            font-weight: bold;
+            font-size: 15px;
+            font-weight: 700;
             cursor: pointer;
-            box-shadow: 0 10px 20px rgba(255, 133, 161, 0.4);
-            transition: transform 0.2s, box-shadow 0.2s;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 10px 20px rgba(255, 133, 161, 0.3);
+            font-family: 'Quicksand', sans-serif;
+            margin-top: 10px;
         }
 
         .btn-open:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 15px 25px rgba(255, 133, 161, 0.5);
+            background: var(--primary-dark);
+            transform: scale(1.05);
+            box-shadow: 0 15px 25px rgba(255, 133, 161, 0.4);
         }
 
         .btn-open:active {
-            transform: translateY(0);
+            transform: scale(0.95);
         }
 
-        /* Decoración de fondo */
-        .circle {
+        /* Partículas de celebración */
+        .particle {
             position: absolute;
-            z-index: 1;
-            border-radius: 50%;
-            background: var(--secondary);
-            opacity: 0.6;
+            pointer-events: none;
+            font-size: 22px;
+            z-index: 5;
+            animation: particleUp 2.5s ease-out forwards;
+        }
+
+        @keyframes particleUp {
+            0% { transform: translateY(0) rotate(0deg) scale(1); opacity: 1; }
+            100% { transform: translateY(-180px) rotate(45deg) scale(0); opacity: 0; }
+        }
+
+        .hidden {
+            display: none;
         }
     </style>
 </head>
 <body>
 
-    <!-- Círculos decorativos de fondo -->
-    <div class="circle" style="width: 200px; height: 200px; top: -50px; right: -50px;"></div>
-    <div class="circle" style="width: 150px; height: 150px; bottom: -30px; left: -30px; background: #e3f2fd;"></div>
-
-    <div class="card">
-        <div class="pixel-art-container">
-            <div class="heart-pixel"></div>
-        </div>
+    <div class="card" id="mainCard">
+        <div class="pixel-heart"></div>
+        <div class="heart-shadow"></div>
+        
         <h1 id="title">Tengo algo para decirte...</h1>
         <div class="message-box" id="msg"></div>
-        <button class="btn-open" id="btn">Toca aquí</button>
+        
+        <button class="btn-open" id="btn">Tocá acá</button>
     </div>
 
     <script>
         const btn = document.getElementById('btn');
         const msg = document.getElementById('msg');
         const title = document.getElementById('title');
+        const card = document.getElementById('mainCard');
 
-        const texto = "¡Feliz Cumpleaños! ❤\n\nEres una persona increíble y quería que tuvieras algo tan único como tú. Gracias por estar en mi vida. ¡Te quiero muchísimo!";
+        // Podés editar este texto como quieras
+        const texto = "¡Feliz Cumpleaños! ❤\n\nQuería prepararte algo tan único como vos. Espero que este nuevo año venga cargado de cosas lindas y momentos felices.\n\n¡Te quiero muchísimo!";
 
-        let i = 0;
+        function createHearts() {
+            for (let i = 0; i < 20; i++) {
+                setTimeout(() => {
+                    const heart = document.createElement('div');
+                    heart.innerHTML = i % 2 === 0 ? '❤' : '✨';
+                    heart.className = 'particle';
+                    // Salen desde diferentes puntos cerca de la tarjeta
+                    heart.style.left = (Math.random() * 80 + 10) + 'vw';
+                    heart.style.top = '70vh';
+                    heart.style.color = i % 2 === 0 ? '#ff85a1' : '#ffdae0';
+                    document.body.appendChild(heart);
+                    
+                    // Limpieza de memoria
+                    setTimeout(() => heart.remove(), 2500);
+                }, i * 120);
+            }
+        }
+
+        let charIndex = 0;
         function escribir() {
-            if (i < texto.length) {
-                msg.innerHTML += texto.charAt(i) === "\n" ? "<br>" : texto.charAt(i);
-                i++;
-                setTimeout(escribir, 40);
+            if (charIndex < texto.length) {
+                const char = texto.charAt(charIndex);
+                msg.innerHTML += char === "\n" ? "<br>" : char;
+                charIndex++;
+                setTimeout(escribir, 45);
             }
         }
 
         btn.addEventListener('click', () => {
-            btn.style.display = 'none';
-            title.innerText = "¡Muchas Felicidades!";
-            escribir();
+            // Animación de salida del botón
+            btn.style.opacity = '0';
+            btn.style.transform = 'scale(0.8)';
+            btn.style.pointerEvents = 'none';
+            
+            setTimeout(() => {
+                btn.className = 'hidden';
+                title.innerText = "¡Muchas Felicidades!";
+                
+                // Pequeño efecto visual en la tarjeta
+                card.style.border = "1px solid var(--primary)";
+                
+                createHearts();
+                escribir();
+            }, 400);
         });
     </script>
 </body>
