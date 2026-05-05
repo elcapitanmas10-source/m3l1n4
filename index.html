@@ -3,175 +3,148 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HBD_LEVEL_UP</title>
-    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <title>Para Alguien Especial</title>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;700&display=swap" rel="stylesheet">
     <style>
-        * { box-sizing: border-box; }
-        
+        :root {
+            --primary: #ff85a1;
+            --secondary: #fce4ec;
+            --text: #4a4a4a;
+        }
+
         body {
-            background: linear-gradient(-45deg, #0f0c29, #302b63, #24243e);
-            background-size: 400% 400%;
-            animation: gradientBG 15s ease infinite;
-            font-family: 'Press Start 2P', cursive;
+            background-color: #f0f2f5;
+            background-image: radial-gradient(#ffcad4 0.5px, #f0f2f5 0.5px);
+            background-size: 20px 20px; /* Fondo de puntos sutil */
+            font-family: 'Quicksand', sans-serif;
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
             margin: 0;
             overflow: hidden;
-            color: #fff;
         }
 
-        @keyframes gradientBG {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-
-        /* Contenedor Principal Estilo Consola */
-        .console-container {
+        /* Tarjeta con sombreado moderno y bordes redondeados */
+        .card {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            border-radius: 24px;
+            padding: 40px;
             width: 90%;
-            max-width: 500px;
-            background: rgba(0, 0, 0, 0.8);
-            border: 4px solid #fff;
-            padding: 20px;
+            max-width: 400px;
+            text-align: center;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            border: 1px solid rgba(255,255,255,0.5);
             position: relative;
-            box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+            z-index: 10;
         }
 
-        /* Pantalla de Texto con Scroll oculto */
-        .screen {
-            background: #1a1a1a;
-            border: 4px solid #444;
-            padding: 20px;
-            height: 250px;
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-start;
+        /* Ilustración Pixel Art (Corazón estilizado con sombras) */
+        .pixel-art-container {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 25px;
             position: relative;
-            overflow-y: auto; /* Permite scroll si el mensaje es largo */
-            scrollbar-width: none; /* Oculta scroll en Firefox */
+            image-rendering: pixelated;
         }
 
-        .screen::-webkit-scrollbar { display: none; } /* Oculta scroll en Chrome/Safari */
-
-        .pixel-portrait {
-            width: 64px;
-            height: 64px;
-            background: #ff6b6b;
-            margin: 0 auto 15px;
-            box-shadow: 
-                0 -4px 0 #000, 0 4px 0 #000, 
-                -4px 0 0 #000, 4px 0 0 #000,
-                0 -8px 0 #ff6b6b, 0 8px 0 #ff6b6b,
-                -8px 0 0 #ff6b6b, 8px 0 0 #ff6b6b;
-            animation: pulse 1s infinite;
+        .heart-pixel {
+            width: 100%;
+            height: 100%;
+            background-color: var(--primary);
+            /* Dibujo de corazón mediante clip-path o sombras */
+            clip-path: polygon(0 30%, 0 50%, 15% 70%, 50% 100%, 85% 70%, 100% 50%, 100% 30%, 80% 10%, 60% 10%, 50% 25%, 40% 10%, 20% 10%);
+            box-shadow: inset -6px -6px 0px rgba(0,0,0,0.1); /* Sombreado interno */
+            animation: floating 3s ease-in-out infinite;
         }
 
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); filter: brightness(1); }
-            50% { transform: scale(1.05); filter: brightness(1.2); }
+        @keyframes floating {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
         }
 
-        h1 { font-size: 14px; text-align: center; color: #00ffcc; text-shadow: 2px 2px #000; }
+        h1 {
+            color: var(--text);
+            font-size: 22px;
+            margin-bottom: 15px;
+        }
 
-        #dialogue {
-            font-size: 11px;
+        .message-box {
+            color: #666;
+            font-size: 16px;
             line-height: 1.6;
-            color: #fff;
-            word-wrap: break-word;
+            min-height: 80px;
+            margin-bottom: 20px;
         }
 
-        /* Botón Estilo Arcade */
-        .btn-start {
-            display: block;
-            margin: 20px auto 0;
-            background: #ff0055;
-            color: #fff;
-            padding: 12px 20px;
+        .btn-open {
+            background: var(--primary);
+            color: white;
             border: none;
+            padding: 15px 30px;
+            border-radius: 50px;
+            font-size: 16px;
+            font-weight: bold;
             cursor: pointer;
-            font-family: 'Press Start 2P', cursive;
-            font-size: 10px;
-            box-shadow: 0 6px 0 #990033;
-            transition: all 0.1s;
+            box-shadow: 0 10px 20px rgba(255, 133, 161, 0.4);
+            transition: transform 0.2s, box-shadow 0.2s;
         }
 
-        .btn-start:active {
-            box-shadow: 0 0 0 #990033;
-            transform: translateY(6px);
+        .btn-open:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 15px 25px rgba(255, 133, 161, 0.5);
         }
 
-        .hidden { display: none; }
+        .btn-open:active {
+            transform: translateY(0);
+        }
 
-        /* Partículas */
-        .particle {
+        /* Decoración de fondo */
+        .circle {
             position: absolute;
-            width: 4px;
-            height: 4px;
-            background: #fff;
-            pointer-events: none;
+            z-index: 1;
+            border-radius: 50%;
+            background: var(--secondary);
+            opacity: 0.6;
         }
     </style>
 </head>
 <body>
 
-    <div class="console-container">
-        <div class="screen">
-            <div class="pixel-portrait" id="icon"></div>
-            <h1 id="header">PLAYER 1 READY?</h1>
-            <div id="dialogue"></div>
+    <!-- Círculos decorativos de fondo -->
+    <div class="circle" style="width: 200px; height: 200px; top: -50px; right: -50px;"></div>
+    <div class="circle" style="width: 150px; height: 150px; bottom: -30px; left: -30px; background: #e3f2fd;"></div>
+
+    <div class="card">
+        <div class="pixel-art-container">
+            <div class="heart-pixel"></div>
         </div>
-        <button class="btn-start" id="actionBtn">PRESS START</button>
+        <h1 id="title">Tengo algo para decirte...</h1>
+        <div class="message-box" id="msg"></div>
+        <button class="btn-open" id="btn">Toca aquí</button>
     </div>
 
     <script>
-        const dialogueBox = document.getElementById('dialogue');
-        const actionBtn = document.getElementById('actionBtn');
-        const header = document.getElementById('header');
-        const icon = document.getElementById('icon');
+        const btn = document.getElementById('btn');
+        const msg = document.getElementById('msg');
+        const title = document.getElementById('title');
 
-        const message = "¡Feliz Cumpleaños! ❤\n\nEres la persona más especial de mi mundo. Quería darte algo diferente, como nosotros.\n\nEspero que este nuevo 'level' venga lleno de items positivos y mucha felicidad. ¡Te quiero muchísimo!";
+        const texto = "¡Feliz Cumpleaños! ❤\n\nEres una persona increíble y quería que tuvieras algo tan único como tú. Gracias por estar en mi vida. ¡Te quiero muchísimo!";
 
-        let index = 0;
-
-        function typeWriter() {
-            if (index < message.length) {
-                // Traducir saltos de línea a HTML
-                const char = message.charAt(index);
-                dialogueBox.innerHTML += char === "\n" ? "<br>" : char;
-                index++;
-                // Auto-scroll hacia abajo mientras escribe
-                document.querySelector('.screen').scrollTop = document.querySelector('.screen').scrollHeight;
-                setTimeout(typeWriter, 40);
+        let i = 0;
+        function escribir() {
+            if (i < texto.length) {
+                msg.innerHTML += texto.charAt(i) === "\n" ? "<br>" : texto.charAt(i);
+                i++;
+                setTimeout(escribir, 40);
             }
         }
 
-        function spawnParticles() {
-            for(let i = 0; i < 30; i++) {
-                const p = document.createElement('div');
-                p.className = 'particle';
-                p.style.left = Math.random() * 100 + 'vw';
-                p.style.top = Math.random() * 100 + 'vh';
-                p.style.opacity = Math.random();
-                document.body.appendChild(p);
-                
-                // Movimiento simple
-                let speed = Math.random() * 2 + 1;
-                setInterval(() => {
-                    let top = parseFloat(p.style.top);
-                    p.style.top = (top + 0.1 * speed) + 'vh';
-                    if(top > 100) p.style.top = '-5vh';
-                }, 20);
-            }
-        }
-
-        actionBtn.addEventListener('click', () => {
-            actionBtn.style.display = 'none';
-            header.innerText = "MESSAGE RECEIVED:";
-            icon.style.background = "#00ffcc"; // Cambia color al activar
-            typeWriter();
-            spawnParticles();
+        btn.addEventListener('click', () => {
+            btn.style.display = 'none';
+            title.innerText = "¡Muchas Felicidades!";
+            escribir();
         });
     </script>
 </body>
