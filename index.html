@@ -41,7 +41,6 @@
             to { transform: translate(10%, 10%); }
         }
 
-        /* CONTENEDOR PRINCIPAL */
         .card {
             background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(15px);
@@ -91,10 +90,9 @@
             font-family: 'Quicksand', sans-serif;
         }
 
-        /* BOTÓN FLOTANTE */
         .floating-btn {
             position: fixed;
-            bottom: -100px; /* Escondido al principio */
+            bottom: -100px;
             right: 30px;
             background: var(--primary);
             color: white;
@@ -113,7 +111,6 @@
             transition: bottom 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
-        /* MODAL */
         .overlay {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
@@ -132,6 +129,7 @@
             width: 85%;
             max-width: 320px;
             text-align: center;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
         }
 
         .close-btn { 
@@ -173,7 +171,7 @@
 
     <div class="overlay" id="overlay">
         <div class="modal">
-            <h2 id="modalDate" style="font-size: 16px; color: var(--primary);"></h2>
+            <h2 id="modalDate" style="font-size: 16px; color: var(--primary); margin-top: 0;"></h2>
             <p id="dailyMsg" style="font-size: 14px; color: #444; line-height: 1.6;"></p>
             <button class="close-btn" id="closeBtn">Cerrar</button>
         </div>
@@ -193,10 +191,26 @@
         const hoy = new Date();
         btnDate.innerText = hoy.toLocaleDateString('es-ES', { day: 'numeric', month: 'short' });
 
-        // GENERADOR DE MENSAJES (Cariñoso pero moderado)
-        const intros = ["Hoy quería recordarte que ", "Nunca olvides que ", "Paso a decirte que ", "Me di cuenta de que "];
-        const cualidades = ["tu forma de ser es única", "tenés una luz que ilumina todo", "sos una persona muy especial", "tu buena onda hace todo mejor", "hacés que las cosas sean más lindas"];
-        const finales = [" y te quiero mucho. ✨", " y te merecés un gran día. 🌸", " y agradezco tu amistad. 😊", ". ¡Que estés muy bien! 💖"];
+        // GENERADOR DE MENSAJES (Enfoque en la conexión y lo que les pasa)
+        const intros = [
+            "Hoy pensaba que ", 
+            "Nunca olvides que ", 
+            "Paso a decirte que ", 
+            "Me encanta que "
+        ];
+        const cualidades = [
+            "lo que tenemos es algo único", 
+            "esto que nos pasa es muy especial", 
+            "lo que estamos construyendo me encanta", 
+            "tenés una forma de ser conmigo que valoro mil", 
+            "nuestra conexión hace que todo sea mejor"
+        ];
+        const finales = [
+            " y te quiero mucho. ✨", 
+            " y me gusta mucho lo que nos pasa. 🌸", 
+            " y agradezco tenerte así de cerca. 😊", 
+            ". ¡Gracias por ser parte de mi vida! 💖"
+        ];
 
         function getDailyMessage() {
             const seed = hoy.getFullYear() + hoy.getMonth() + hoy.getDate();
@@ -221,20 +235,17 @@
             }
         }
 
-        // ACCIÓN INICIAL: REVELAR CUMPLEAÑOS
         startBtn.addEventListener('click', (e) => {
             explode(e.clientX, e.clientY);
             startBtn.style.display = 'none';
             mainTitle.innerText = "¡Feliz Cumple!";
             cumpleMsg.style.display = 'block';
             
-            // Aparece el botón flotante después de la sorpresa
             setTimeout(() => {
                 dailyBtn.style.bottom = '30px';
             }, 1000);
         });
 
-        // ACCIÓN MENSAJE DIARIO
         dailyBtn.addEventListener('click', () => {
             overlay.style.display = 'flex';
             modalDate.innerText = "Mensaje del " + hoy.toLocaleDateString('es-ES', { day: 'numeric', month: 'long' });
